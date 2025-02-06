@@ -1,0 +1,36 @@
+name: Run Mail Room Every 5 Minutes
+
+on:
+  schedule:
+    - cron: '*/4 * * * *'  # Runs every 4 minutes 20 seconds
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'  # Replace with your Python version
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt  # Modify if needed
+
+      - name: Run Python Script
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          SHOPIFY_API_KEY: ${{ secrets.SHOPIFY_API_KEY }}
+          SHOPIFY_SHARED_SECRET: ${{ secrets.SHOPIFY_SHARED_SECRET }}
+          SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+          SHOPIFY_PASSWORD: ${{ secrets.SHOPIFY_PASSWORD }}
+          SHOPIFY_SHOP_NAME: ${{ secrets.SHOPIFY_SHOP_NAME }}
+          SHOPIFY_API_VERSION: ${{ secrets.SHOPIFY_API_VERSION }}
+          SHOPIFY_SHOP_URL: ${{ secrets.SHOPIFY_SHOP_URL }}
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+        run: python -m mail_room.main  # Replace with your script's filename
