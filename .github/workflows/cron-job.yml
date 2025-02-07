@@ -1,9 +1,9 @@
-name: Run Mail Room Every 30 Minutes
+name: Test Run Mail Room Every 30 Minutes
 
 on:
-  schedule:
-    - cron: '*/30 * * * *'  # Runs every 30 minutes 20 seconds
-  workflow_dispatch:  # Allows manual triggering
+  push:  # Triggers the workflow on push events
+    branches:
+      - test  # Replace with the branch you want to trigger on push
 
 jobs:
   run-script:
