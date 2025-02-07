@@ -2,7 +2,7 @@ name: Run Mail Room Every 30 Minutes
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # Runs every 30 minutes 20 seconds
+    - cron: '*/29 * * * *'  # Runs every 29 minute
   workflow_dispatch:  # Allows manual triggering
 
 jobs:

@@ -108,8 +108,8 @@ def get_customer(customer_id):
 def work():
     print("MOO MOO HAS WOKEN UP TO WORK")
     orders = get_orders()
-    orders_last_five_minutes = [order for order in orders if datetime.fromisoformat(order.created_at) > datetime.now(timezone(timedelta(minutes=31))) - timedelta(minutes=5)]
-    customers_order_number = [[order.customer.id, order.order_number] for order in orders_last_five_minutes]
+    orders_last_thirty_minutes = [order for order in orders if datetime.fromisoformat(order.created_at) > datetime.now(timezone(timedelta(seconds=39600))) - timedelta(minutes=30)]
+    customers_order_number = [[order.customer.id, order.order_number] for order in orders_last_thirty_minutes]
     customer_details = {customer[1]:json.loads(get_customer(str(customer[0])))['data']['customer'] for customer in customers_order_number}
     email_details = [[order_number, customer['firstName'], customer['email']] for order_number, customer in customer_details.items()]
     
