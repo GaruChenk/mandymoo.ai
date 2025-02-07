@@ -40,7 +40,7 @@ def create_email_template(name):
         <p>
             We're excited to help you create a unique, one-of-a-kind blind box. Let's start customising! 
             Please take a moment to fill out this Google Form with your customisation details: 
-            <a href='{google_forms}' target='_blank'>Valentine's Edition Blind Box Template 🌹</a>
+            <a href="{google_forms}" target='_blank'>Valentine's Edition Blind Box Template 🌹</a>
             (You may use any email that works with Google Form, but preferably the same email you used for your purchase).
         </p>
         <p>

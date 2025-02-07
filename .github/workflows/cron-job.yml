@@ -33,4 +33,5 @@ jobs:
           SHOPIFY_API_VERSION: ${{ secrets.SHOPIFY_API_VERSION }}
           SHOPIFY_SHOP_URL: ${{ secrets.SHOPIFY_SHOP_URL }}
           TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          GOOGLE_FORM: ${{ secrets.GOOGLE_FORM }}
         run: python -m mail_room.main  # Replace with your script's filename
