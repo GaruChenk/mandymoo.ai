@@ -35,6 +35,14 @@ jobs:
 
       
       - name: Update Last Order Number 
+        env: 
+          SHOPIFY_API_KEY: ${{ secrets.SHOPIFY_API_KEY }}
+          SHOPIFY_SHARED_SECRET: ${{ secrets.SHOPIFY_SHARED_SECRET }}
+          SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+          SHOPIFY_PASSWORD: ${{ secrets.SHOPIFY_PASSWORD }}
+          SHOPIFY_SHOP_NAME: ${{ secrets.SHOPIFY_SHOP_NAME }}
+          SHOPIFY_API_VERSION: ${{ secrets.SHOPIFY_API_VERSION }}
+          SHOPIFY_SHOP_URL: ${{ secrets.SHOPIFY_SHOP_URL }}
         run: |
           NEW_LAST_ORDER_NUMBER=$(python -m mail_room.get_max_order_number)  # Replace with your script to get the new max order number
           echo $NEW_LAST_ORDER_NUMBER > last_order_number.txt
