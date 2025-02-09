@@ -9,5 +9,5 @@ def get_max_order_number():
 if __name__ == "__main__":
     max_order_number = get_max_order_number()
     with open('mail_room/last_order_number.txt', 'w') as file:
-        file.write(int(max_order_number))
+        file.write(str(max_order_number))
     print(f"The maximum order number is: {max_order_number}")
