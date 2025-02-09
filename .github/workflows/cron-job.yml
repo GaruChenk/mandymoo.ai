@@ -1,8 +1,5 @@
-name: Run Mail Room 30 Minutes Past the Hour
-
+name: Test
 on:
-  schedule:
-    - cron: '30 * * * *'  # Runs every 29 minute
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
