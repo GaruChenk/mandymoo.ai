@@ -114,24 +114,24 @@ def work():
     email_details = [[order_number, customer['firstName'], customer['email']] for order_number, customer in customer_details.items()]
     
     print(f"MOO MOO HAS SEEN {len(email_details)} NEW EMAILS TO SEND")
-    
-    for order in email_details:
-        msg = MIMEMultipart()
-        msg['From'] = email
-        msg['To'] = order[2]
-        subject = str(f"ORDER #{order[0]} - Let's Customise Your Blind Box!")
-        msg['Subject'] = subject
+    if len(email_details) > 0:
+        for order in email_details:
+            msg = MIMEMultipart()
+            msg['From'] = email
+            msg['To'] = order[2]
+            subject = str(f"ORDER #{order[0]} - Let's Customise Your Blind Box!")
+            msg['Subject'] = subject
 
-        html_content = create_email_template(order[1])
-        msg.attach(MIMEText(html_content, 'html'))
-        msg.attach(img)
+            html_content = create_email_template(order[1])
+            msg.attach(MIMEText(html_content, 'html'))
+            msg.attach(img)
 
-        # Send the email
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
-            server.starttls() # Upgrade the connection to secure
-            server.login(email, email_password)
-            server.send_message(msg)
-        
+            # Send the email
+            with smtplib.SMTP("smtp.gmail.com", 587) as server:
+                server.starttls() # Upgrade the connection to secure
+                server.login(email, email_password)
+                server.send_message(msg)
+            
     print(f"MOO MOO HAS SENT {len(email_details)} NEW EMAILS TO SEND")
     print("MOO MOO BRB 5 MINS SLEEP")
 
