@@ -1,4 +1,4 @@
-from email_moogent import get_orders
+from mail_room.email_moogent import get_orders
 
 def get_max_order_number():
     orders = get_orders()
