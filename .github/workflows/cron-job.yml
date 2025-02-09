@@ -45,7 +45,7 @@ jobs:
         run: |
           NEW_LAST_ORDER_NUMBER=$(python -m mail_room.get_max_order_number)  # Replace with your script to get the new max order number
           echo $NEW_LAST_ORDER_NUMBER > last_order_number.txt
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git commit -m "Update last order number" -a 
-          git push https://${{ secrets.GH_PAT }}@github.com/GaruChenk/mandymoo.ai.git HEAD:main
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update last order number" -a
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/GaruChenk/mandymoo.ai.git HEAD:main
