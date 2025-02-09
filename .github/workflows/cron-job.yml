@@ -31,7 +31,20 @@ jobs:
           fi
           echo "LAST_ORDER_NUMBER=$LAST_ORDER_NUMBER" >> $GITHUB_ENV
 
-
+      - name: Run Mail Room Script
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          SHOPIFY_API_KEY: ${{ secrets.SHOPIFY_API_KEY }}
+          SHOPIFY_SHARED_SECRET: ${{ secrets.SHOPIFY_SHARED_SECRET }}
+          SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+          SHOPIFY_PASSWORD: ${{ secrets.SHOPIFY_PASSWORD }}
+          SHOPIFY_SHOP_NAME: ${{ secrets.SHOPIFY_SHOP_NAME }}
+          SHOPIFY_API_VERSION: ${{ secrets.SHOPIFY_API_VERSION }}
+          SHOPIFY_SHOP_URL: ${{ secrets.SHOPIFY_SHOP_URL }}
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          GOOGLE_FORM: ${{ secrets.GOOGLE_FORM }}
+        run: python -m mail_room.main  # Replace with your script's filename
 
       - name: Update Last Order Number 
         env: 
