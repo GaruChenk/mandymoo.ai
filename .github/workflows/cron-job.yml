@@ -21,7 +21,17 @@ jobs:
         run: |
           pip install -r requirements.txt  # Modify if needed
 
-      - name: Run Python Script
+      - name: Read Last Order Number
+        id: read_last_order
+        run: |
+          if [ -f mail_room/last_order_number.txt ]; then
+            LAST_ORDER_NUMBER=$(cat mail_room/last_order_number.txt)
+          else
+            LAST_ORDER_NUMBER=0
+          fi
+          echo "LAST_ORDER_NUMBER=$LAST_ORDER_NUMBER" >> $GITHUB_ENV
+
+      - name: Run Mail Room Script
         env:
           EMAIL: ${{ secrets.EMAIL }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
@@ -35,3 +45,20 @@ jobs:
           TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
           GOOGLE_FORM: ${{ secrets.GOOGLE_FORM }}
         run: python -m mail_room.main  # Replace with your script's filename
+
+      - name: Update Last Order Number 
+        env: 
+          SHOPIFY_API_KEY: ${{ secrets.SHOPIFY_API_KEY }}
+          SHOPIFY_SHARED_SECRET: ${{ secrets.SHOPIFY_SHARED_SECRET }}
+          SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+          SHOPIFY_PASSWORD: ${{ secrets.SHOPIFY_PASSWORD }}
+          SHOPIFY_SHOP_NAME: ${{ secrets.SHOPIFY_SHOP_NAME }}
+          SHOPIFY_API_VERSION: ${{ secrets.SHOPIFY_API_VERSION }}
+          SHOPIFY_SHOP_URL: ${{ secrets.SHOPIFY_SHOP_URL }}
+        run: |
+          NEW_LAST_ORDER_NUMBER=$(python -m mail_room.get_max_order_number)  # Replace with your script to get the new max order number
+          echo $NEW_LAST_ORDER_NUMBER > last_order_number.txt
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update last order number" -a
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git
