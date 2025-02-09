@@ -48,4 +48,4 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git commit -m "Update last order number" -a 
-          git push https://${GH_PAT}@github.com/GaruChenk/mandymoo.ai.git HEAD:main
+          git push https://${{ secrets.GH_PAT }}/GaruChenk/mandymoo.ai.git HEAD:main
