@@ -1,1 +1,1 @@
-Connecting to mandymoo.myshopify.com with API version 2025-01... The maximum order number is: 2230
+Connecting to mandymoo.myshopify.com with API version 2025-01... The maximum order number is: 2235
