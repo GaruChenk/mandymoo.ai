@@ -108,7 +108,7 @@ def get_customer(customer_id):
 def work():
     print("MOO MOO HAS WOKEN UP TO WORK")
     orders = get_orders()
-    with open('mandymoo.ai/mail_room/last_order_number.txt', 'r') as file:
+    with open('mail_room/last_order_number.txt', 'r') as file:
         last_order = int(file.read())
     new_orders = [order for order in orders if order.order_number > last_order] 
     customers_order_number = [[order.customer.id, order.order_number] for order in new_orders]
